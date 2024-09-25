@@ -4,7 +4,6 @@ sequenceDiagram
 participant browser
 participant server
 
-Note right of browser: A new note is created. 
 Note right of browser: The browser creates a new note with the current date and the given content
 Note right of browser: The browser adds this note to the data it prints
 Note right of browser: The browser repaints the page
