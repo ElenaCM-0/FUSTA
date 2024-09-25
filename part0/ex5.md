@@ -18,7 +18,7 @@ browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
 activate server
 server-->>browser: the javascript document
 deactivate server
-Note right of the browser: The browser starts executing the JavaScript code that fetches the JSON from the server and rewrites the submit form action so as to not send the automatic post
+Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server and rewrites the submit form action so as to not send the automatic post
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
 activate server
