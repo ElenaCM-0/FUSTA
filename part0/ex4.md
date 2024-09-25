@@ -5,9 +5,11 @@ participant browser
 participant server
 
 browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+Note right of browser: The payload of the post is: "note: <the text introduced in the text field>"
 
 activate server
 server-->>browser: 302 found. Redirect to https://studies.cs.helsinki.fi/exampleapp/notes
+Note left of server: The server adds to its database a note with the given content and then sends the redirect
 deactivate server
 
 browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
