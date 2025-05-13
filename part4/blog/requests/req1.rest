@@ -1,0 +1,13 @@
+###
+POST http://localhost:3003/api/blogs HTTP/1.1
+content-type: application/json
+
+{ 
+      "title": "Cheese: Are there health benefits?", 
+      "author": "Shishira Sreenivas",
+      "url": "https://www.webmd.com/diet/health-benefits-cheese",
+      "likes": 5
+}
+
+###
+GET http://localhost:3003/api/blogs/
