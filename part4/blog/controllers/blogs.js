@@ -2,13 +2,21 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({})
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 })
   
   return response.json(blogs)
 })
 
-blogsRouter.post('/', async (request, response) => {
+const middleware = require('../utils/middleware')
+
+blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
   const body = request.body
+
+  const user = request.user
+
+  if (!user) {
+    return response.status(400).json({ error: 'UserId missing or not valid' })
+  }
 
   if (!body.title) {
     return response.status(400).json({
@@ -26,15 +34,33 @@ blogsRouter.post('/', async (request, response) => {
           title: body.title,
           author: body.author,
           url: body.url,
-          likes: body.likes ? body.likes: 0
+          likes: body.likes ? body.likes: 0,
+          user: user._id
         })
 
   const saved_blog = await blog.save()
+
+  user.blogs = user.blogs.concat(saved_blog._id)
+
+  await user.save()
   
   return response.status(201).json(saved_blog)
 })
 
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) => {
+  const userid = request.user.id
+
+  const blog = await Blog.findById(request.params.id)
+
+  if ( blog === null ) {
+    return response.status(204).end()
+  }
+
+  if ( blog.user.toString() !== userid.toString() ) {
+    return response.status(400).json({
+      error: 'You can only delete your own posts'
+    })
+  }
   await Blog.findByIdAndDelete(request.params.id)
   
   response.status(204).end()

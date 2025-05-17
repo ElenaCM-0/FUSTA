@@ -1,9 +1,10 @@
 ###
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsZW5hY20iLCJpZCI6IjY4MjgzYTk2NGRmODcyYzdiYmY2MGNiMiIsImlhdCI6MTc0NzQ2NzYyNCwiZXhwIjoxNzQ3NDcxMjI0fQ.T03CFTxfXrwDPiH8WGIgyjIv45qqTlSb-AkUnr5V2DA
 
 { 
-      "title": "Cheese: Are there health benefits?", 
+      "title": "Chess!!!", 
       "author": "Shishira Sreenivas",
       "url": "https://www.webmd.com/diet/health-benefits-cheese",
       "likes": 5
@@ -11,3 +12,29 @@ content-type: application/json
 
 ###
 GET http://localhost:3003/api/blogs/
+
+###
+POST http://localhost:3003/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "elenacm",
+    "password": "password123"
+}
+
+###
+GET http://localhost:3003/api/users/
+
+###
+DELETE http://localhost:3003/api/blogs/68283d9a6e785a294ca0a84d HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVsZW5hY20iLCJpZCI6IjY4MjgzYTk2NGRmODcyYzdiYmY2MGNiMiIsImlhdCI6MTc0NzQ2NzYyNCwiZXhwIjoxNzQ3NDcxMjI0fQ.T03CFTxfXrwDPiH8WGIgyjIv45qqTlSb-AkUnr5V2DA
+
+###
+POST http://localhost:3003/api/users HTTP/1.1
+content-type: application/json
+
+{ 
+      "name": "ECM", 
+      "username": "elenacm",
+      "password": "password123" 
+}
